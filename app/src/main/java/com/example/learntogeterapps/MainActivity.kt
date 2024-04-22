@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -108,7 +110,7 @@ fun TopScreen(
 
 @Composable
 fun TaskManager(
-    iconSize:Int,
+    iconSize: Int,
     color: Color,
     messageCenter: String,
     messageBody: String
@@ -130,13 +132,88 @@ fun TaskManager(
         Text(
             messageCenter,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(24.dp,24.dp,0.dp,8.dp)
+            modifier = Modifier.padding(24.dp, 24.dp, 0.dp, 8.dp)
         )
         Text(
             messageBody,
             fontSize = 16.sp,
         )
     }
+}
+
+@Composable
+fun ComposeLayout(
+    msg: String,
+    msg2: String,
+    msg3: String,
+    msg4: String,
+    msg5: String,
+    msg6: String,
+    msg7: String,
+    msg8: String,
+) {
+    Column {
+
+        Row {// 上２段
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(16.dp)
+                    .background(Color(0xFFEADDFF))
+            ) {
+                Text(
+                    text = msg,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = msg2,
+                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        text = msg3,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = msg4,
+                    )
+                }
+            }
+        }
+        Row {// 下２段
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = msg5,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = msg6,
+                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        text = msg7,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = msg8,
+                    )
+                }
+            }
+
+        }
+    }
+
 }
 
 @Preview(showBackground = true)
@@ -162,13 +239,31 @@ fun GreetingPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun IconPreview(){
+fun IconPreview() {
     LearnTogeterAppsTheme {
-      TaskManager(
-          iconSize = 48,
-          color = Color.Green,
-          messageCenter = "All tasks completed",
-          messageBody = "Nice work!"
-      )
+        TaskManager(
+            iconSize = 48,
+            color = Color.Green,
+            messageCenter = "All tasks completed",
+            messageBody = "Nice work!"
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ComposeLayoutPreview() {
+    LearnTogeterAppsTheme {
+        ComposeLayout(
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+
+        )
     }
 }
