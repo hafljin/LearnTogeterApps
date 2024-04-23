@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -27,7 +27,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,8 +42,7 @@ class MainActivity : ComponentActivity() {
             LearnTogeterAppsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
 //                    TopScreen(
 //                        messageTitle = "Jetpack Compose tutorial",
@@ -71,10 +72,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TopScreen(
-    messageTitle: String,
-    messageTop: String,
-    messageDisp: String,
-    modifier: Modifier = Modifier
+    messageTitle: String, messageTop: String, messageDisp: String, modifier: Modifier = Modifier
 ) {
     val topImage = painterResource(R.drawable.bg_compose_background)
 
@@ -84,20 +82,17 @@ fun TopScreen(
     ) {
         //top image
         Image(
-            painter = topImage,
-            contentDescription = "null"
+            painter = topImage, contentDescription = "null"
         )
         Spacer(modifier = Modifier.height(8.dp))
         // title
         Text(
-            messageTitle,
-            Modifier.padding(8.dp)
+            messageTitle, Modifier.padding(8.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
         // body
         Text(
-            messageTop,
-            Modifier.padding(8.dp)
+            messageTop, Modifier.padding(8.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
         // discriptions
@@ -110,10 +105,7 @@ fun TopScreen(
 
 @Composable
 fun TaskManager(
-    iconSize: Int,
-    color: Color,
-    messageCenter: String,
-    messageBody: String
+    iconSize: Int, color: Color, messageCenter: String, messageBody: String
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -141,80 +133,68 @@ fun TaskManager(
     }
 }
 
+
 @Composable
-fun ComposeLayout(
-    msg: String,
-    msg2: String,
-    msg3: String,
-    msg4: String,
-    msg5: String,
-    msg6: String,
-    msg7: String,
-    msg8: String,
-) {
-    Column {
-
-        Row {// 上２段
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(16.dp)
-                    .background(Color(0xFFEADDFF))
-            ) {
-                Text(
-                    text = msg,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = msg2,
-                )
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        text = msg3,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = msg4,
-                    )
-                }
-            }
+fun ComposeTogether(){
+    Column (Modifier.fillMaxWidth()) {
+        Row (Modifier.weight(1f)) {
+            ComposeInfoCard(
+                msgTitle = stringResource(R.string.first_title),
+                msgText = stringResource(R.string.first_description),
+                backgorundColor = Color(0xFFEADDFF),
+                modifier = Modifier.weight(1f)
+            )
+            ComposeInfoCard(
+                msgTitle = stringResource(R.string.second_title),
+                msgText = stringResource(R.string.second_description),
+                backgorundColor = Color(0xFFD0BCFF),
+                modifier = Modifier.weight(1f)
+            )
         }
-        Row {// 下２段
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(
-                    text = msg5,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = msg6,
-                )
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        text = msg7,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = msg8,
-                    )
-                }
-            }
-
+        Row (Modifier.weight(1f)) {
+            ComposeInfoCard(
+                msgTitle = stringResource(R.string.third_title),
+                msgText = stringResource(R.string.third_description),
+                backgorundColor = Color(0xFFB69DF8),
+                modifier = Modifier.weight(1f)
+            )
+            ComposeInfoCard(
+                msgTitle = stringResource(R.string.last_title),
+                msgText = stringResource(R.string.last_description),
+                backgorundColor = Color(0xFFF6EDFF),
+                modifier = Modifier.weight(1f)
+            )
         }
+
     }
-
 }
+@Composable
+private fun ComposeInfoCard(
+    msgTitle: String,
+    msgText: String,
+    backgorundColor: Color,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .background(backgorundColor)
+            .padding(16.dp)
+            .fillMaxSize()
+    ) {
+        Text(
+            text = msgTitle,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Text(
+            text = msgText,
+            textAlign = TextAlign.Justify,
+        )
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
@@ -222,17 +202,8 @@ fun GreetingPreview() {
     LearnTogeterAppsTheme {
         TopScreen(
             messageTitle = "Jetpack Compose tutorial",
-            messageTop = "Jetpack Compose tutorial\n" +
-                    "Jetpack Compose is a modern toolkit for building native Android UI. " +
-                    "Compose simplifies and accelerates UI development on Android with less code," +
-                    " powerful tools, and intuitive Kotlin APIs.",
-            messageDisp = "In this tutorial, you build a simple UI component with declarative functions." +
-                    " You call Compose functions to say what elements you want and the Compose compiler does the rest. " +
-                    "Compose is built around Composable functions. These functions let you define your app\\'s " +
-                    "UI programmatically because they let you describe how it should look and provide data dependencies," +
-                    " rather than focus on the process of the UI\\'s construction, " +
-                    "such as initializing an element and then attaching it to a parent. To create a Composable function, " +
-                    "you add the @Composable annotation to the function name.",
+            messageTop = "Jetpack Compose tutorial\n" + "Jetpack Compose is a modern toolkit for building native Android UI. " + "Compose simplifies and accelerates UI development on Android with less code," + " powerful tools, and intuitive Kotlin APIs.",
+            messageDisp = "In this tutorial, you build a simple UI component with declarative functions." + " You call Compose functions to say what elements you want and the Compose compiler does the rest. " + "Compose is built around Composable functions. These functions let you define your app\\'s " + "UI programmatically because they let you describe how it should look and provide data dependencies," + " rather than focus on the process of the UI\\'s construction, " + "such as initializing an element and then attaching it to a parent. To create a Composable function, " + "you add the @Composable annotation to the function name.",
         )
     }
 }
@@ -254,16 +225,6 @@ fun IconPreview() {
 @Composable
 fun ComposeLayoutPreview() {
     LearnTogeterAppsTheme {
-        ComposeLayout(
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-
-        )
+        ComposeTogether()
     }
 }
